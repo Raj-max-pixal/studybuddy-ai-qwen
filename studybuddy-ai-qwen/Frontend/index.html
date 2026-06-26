@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyBuddy AI | Smart Learning Companion</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo" onclick="switchTab('dashboard')">
+                StudyBuddy <span>AI</span>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="#" class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">Dashboard</a>
+                <a href="#" class="nav-item" data-tab="subjects" onclick="switchTab('subjects')">Subjects</a>
+                <a href="#" class="nav-item" data-tab="notes" onclick="switchTab('notes')">Notes</a>
+                <a href="#" class="nav-item" data-tab="quiz" onclick="switchTab('quiz')">Quiz</a>
+                <a href="#" class="nav-item" data-tab="ai-tutor" onclick="switchTab('ai-tutor')">AI Tutor</a>
+                <a href="#" class="nav-item" data-tab="progress" onclick="switchTab('progress')">Progress</a>
+            </nav>
+
+            <div class="header-controls">
+                <div class="judge-tagline-nav" title="Hackathon Statement">
+                    <span class="pulse-dot"></span>
+                    <span>remembers users & gets smarter</span>
+                </div>
+                <div class="theme-selector-container">
+                    <select id="themeSelector" class="theme-selector">
+                        <option value="dark">🌙 Dark</option>
+                        <option value="light">☀️ Light</option>
+                        <option value="yellow">💛 Yellow</option>
+                    </select>
+                </div>
+                <button id="loginBtn" class="btn-sm" onclick="alert('Login page coming soon!')">Login</button>
+                <button id="signupBtn" class="btn-sm" style="background: var(--primary); color: #0f0f0f; border: none;" onclick="alert('Sign up page coming soon!')">Sign Up</button>
+                <div class="notification-btn" onclick="alert('No new notifications!')">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="badge"></span>
+                </div>
+                <div class="settings-btn" onclick="switchTab('settings')" title="Settings">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+                <div class="user-avatar" onclick="switchTab('profile')" id="navAvatarWrapper">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Student Profile" id="navAvatar">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Global App Layout -->
+    <div class="app-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="app-sidebar">
+            <ul class="sidebar-nav">
+                <li class="active" data-sidebar="dashboard" onclick="switchTab('dashboard')">
+                    <i class="fa-solid fa-table-cells-large"></i> Dashboard
+                </li>
+                <li data-sidebar="ai-tutor" onclick="switchTab('ai-tutor')">
+                    <i class="fa-solid fa-robot"></i> AI Tutor
+                </li>
+                <li data-sidebar="calendar" onclick="switchTab('calendar')">
+                    <i class="fa-regular fa-calendar-days"></i> Study Calendar
+                </li>
+                <li data-sidebar="subjects" onclick="switchTab('subjects')">
+                    <i class="fa-solid fa-book"></i> Subjects
+                </li>
+                <li data-sidebar="notes" onclick="switchTab('notes')">
+                    <i class="fa-regular fa-file-lines"></i> Notes
+                </li>
+                <li data-sidebar="quiz" onclick="switchTab('quiz')">
+                    <i class="fa-regular fa-square-question"></i> Quiz
+                </li>
+                <li data-sidebar="progress" onclick="switchTab('progress')">
+                    <i class="fa-solid fa-chart-line"></i> Progress
+                </li>
+                <li data-sidebar="leaderboard" onclick="switchTab('leaderboard')">
+                    <i class="fa-solid fa-ranking-star"></i> Leaderboard
+                </li>
+                <li data-sidebar="achievements" onclick="switchTab('achievements')">
+                    <i class="fa-solid fa-trophy"></i> Achievements
+                </li>
+                <li data-sidebar="pomodoro" onclick="switchTab('pomodoro')">
+                    <i class="fa-solid fa-stopwatch"></i> Pomodoro Page
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer-container">
+                <div class="upgrade-pro-card">
+                    <span class="pro-badge">PRO PLAN</span>
+                    <p>Unlock all AI capabilities and unlimited storage.</p>
+                    <button class="btn-upgrade" onclick="alert('Upgrade Pro dialog triggered.')">Upgrade Pro</button>
+                </div>
+                
+                <div class="sidebar-settings-link" onclick="switchTab('settings')">
+                    <i class="fa-solid fa-gear"></i> Settings
+                </div>
+            </div>
+        </aside>
+
+        <!-- App Main Views -->
+        <main class="app-content">
+
+            <!-- 1. DASHBOARD VIEW -->
+            <div id="view-dashboard" class="tab-view active">
+                <!-- Hero Banner -->
+                <section class="hero-banner">
+                    <div class="hero-text">
+                        <div class="daily-vibes-badge">
+                            <i class="fa-solid fa-rocket"></i>
+                            <span>Daily Vibes: Don't stop until you're proud. 🚀</span>
+                        </div>
+                        <h1>Your Personal <span class="gradient-text">AI Learning</span><br>Companion</h1>
+                        <p>Learn smarter, generate notes, create quizzes, track progress, and get instant AI tutoring.</p>
+                        <div class="hero-buttons">
+                            <!-- Change: Start Learning -> Pomodoro Timer Page -->
+                            <button class="btn-primary" onclick="startLearningBtnClick()">Start Learning</button>
+                            <button class="btn-outline" onclick="switchTab('notes')">Generate Notes</button>
+                        </div>
+                    </div>
+                    <div class="hero-image-container">
+                        <div class="floating-badge badge-realtime">
+                            <i class="fa-solid fa-bolt"></i> REAL-TIME
+                        </div>
+                        <img src="hero_study_buddy.png" alt="AI Study Tutor Illustration" class="hero-illustration">
+                        <div class="floating-badge badge-accuracy">
+                            <span class="accuracy-num">98%</span>
+                            <span class="accuracy-text">ACCURACY</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Row 1: Three Quick Cards -->
+                <div class="dashboard-row-three">
+                    <!-- AI Tutor Card -->
+                    <div class="card module-card card-ai-tutor">
+                        <div class="card-header-flex">
+                            <div class="card-header-icon tutor-icon-bg">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <span class="badge-status status-active">Active Now</span>
+                        </div>
+                        <h3>AI Tutor</h3>
+                        <p class="module-desc">Instant chat and doubt solving powered by GPT-4o.</p>
+                        <div class="tutor-voice-row">
+                            <div class="voice-support-pill">
+                                <i class="fa-solid fa-volume-high"></i>
+                                <span>Voice support</span>
+                            </div>
+                            <div class="voice-toggle-icon">
+                                <i class="fa-solid fa-microphone"></i>
+                            </div>
+                        </div>
+                        <button class="btn-tutor-chat" onclick="switchTab('ai-tutor')">Open Chat</button>
+                    </div>
+
+                    <!-- Smart Notes Card -->
+                    <div class="card module-card card-notes">
+                        <div class="card-header-flex">
+                            <div class="card-header-icon notes-icon-bg">
+                                <i class="fa-regular fa-file-lines"></i>
+                            </div>
+                            <span class="badge-status status-pdf">PDF/Text</span>
+                        </div>
+                        <h3>Smart Notes</h3>
+                        <p class="module-desc">Convert text or PDF into summarized, structured notes.</p>
+                        <div class="upload-zone-small" onclick="switchTab('notes')">
+                            <div class="upload-icon-circle">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                            </div>
+                            <span>Click or drag to upload</span>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Generator Card -->
+                    <div class="card module-card card-quiz">
+                        <div class="card-header-flex">
+                            <div class="card-header-icon quiz-icon-bg">
+                                <i class="fa-regular fa-square-question"></i>
+                            </div>
+                            <span class="badge-status status-quiz">New Quiz</span>
+                        </div>
+                        <h3>Quiz Generator</h3>
+                        <p class="module-desc">Auto-generate MCQs with custom difficulty levels.</p>
+                        <div class="quiz-controls-row">
+                            <div class="select-wrapper">
+                                <select id="quizDifficulty" class="select-control">
+                                    <option value="easy">Easy</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="hard">Hard</option>
+                                </select>
+                            </div>
+                            <div class="select-wrapper">
+                                <select id="quizQuestionsCount" class="select-control">
+                                    <option value="5">5 Questions</option>
+                                    <option value="10" selected>10 Questions</option>
+                                    <option value="20">20 Questions</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="btn-generate-quiz" onclick="switchTab('quiz')">Generate Quiz</button>
+                    </div>
+                </div>
+
+                <!-- Row 2: Planner (Left) & Stack of Progress/Timer (Right) -->
+                <div class="dashboard-row-two" id="planner-section">
+                    <!-- Study Planner Card -->
+                    <div class="card planner-card">
+                        <div class="card-header-flex">
+                            <div class="card-header-icon planner-icon-bg">
+                                <i class="fa-regular fa-calendar-check"></i>
+                            </div>
+                            <h3>Study Planner</h3>
+                        </div>
+                        <p class="section-title">TODAY'S GOALS</p>
+                        
+                        <div class="empty-state" id="dashboardPlannerEmptyState">
+                            <p>No memory data available.</p>
+                            <button class="btn-create-profile" onclick="focusProfile()">Create Memory Profile</button>
+                        </div>
+                        <div class="content-state" id="dashboardPlannerContentState" style="display: none;">
+                            <ul id="dashboardPlanList" class="checklist">
+                                <!-- Populated dynamically -->
+                            </ul>
+                        </div>
+                        <button class="btn-add-goal" onclick="triggerAddNewGoal()">
+                            <i class="fa-solid fa-plus"></i> Add New Goal
+                        </button>
+                    </div>
+
+                    <!-- Right Stack Column -->
+                    <div class="dashboard-right-stack">
+                        <!-- Progress Tracker Card -->
+                        <div class="card progress-tracker-card">
+                            <div class="card-header-flex">
+                                <div class="card-header-icon progress-icon-bg">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </div>
+                                <h3>Progress Tracker</h3>
+                            </div>
+                            
+                            <div class="empty-state" id="dashboardProgressEmptyState">
+                                <p>No memory data available.</p>
+                                <button class="btn-create-profile" onclick="focusProfile()">Create Memory Profile</button>
+                            </div>
+                            
+                            <div class="content-state" id="dashboardProgressContentState" style="display: none;">
+                                <div class="progress-tracker-content">
+                                    <div class="gauge-container">
+                                        <svg class="progress-ring" width="100" height="100">
+                                            <circle class="progress-ring__background" stroke="rgba(255, 255, 255, 0.05)" stroke-width="8" fill="transparent" r="40" cx="50" cy="50" />
+                                            <circle class="progress-ring__circle" id="healthCircleRing" stroke="#06b6d4" stroke-width="8" fill="transparent" r="40" cx="50" cy="50" />
+                                        </svg>
+                                        <div class="gauge-value-wrapper">
+                                            <span class="gauge-value" id="healthGaugeValue">0%</span>
+                                            <span class="gauge-label">WEEKLY PROGRESS</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tracker-stats-col">
+                                        <div class="tracker-stat-box" onclick="switchTab('streak')" style="cursor: pointer;" title="View Streak Details">
+                                            <span class="stat-title">STUDY STREAK</span>
+                                            <span class="stat-val" id="streakVal">0 Days</span>
+                                        </div>
+                                        <div class="tracker-stat-box" onclick="switchTab('xp')" style="cursor: pointer;" title="View XP History">
+                                            <span class="stat-title">XP POINTS</span>
+                                            <span class="stat-val" id="xpPointsVal">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="achievement-badges-row">
+                                    <span class="badge-achievement badge-fast-learner" onclick="switchTab('achievements')">Fast Learner 🔥</span>
+                                    <span class="badge-achievement badge-quiz-master" onclick="switchTab('achievements')">Quiz Master 🏆</span>
+                                    <span class="badge-achievement badge-night-owl" onclick="switchTab('achievements')">Night Owl 🦉</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pomodoro Timer Card -->
+                        <div class="card timer-card">
+                            <div class="card-header-flex">
+                                <div class="card-header-icon timer-icon-bg">
+                                    <i class="fa-regular fa-clock"></i>
+                                </div>
+                                <h3>Pomodoro Timer</h3>
+                            </div>
+                            <div class="timer-display" id="timerDisplay">25:00</div>
+                            <div class="timer-controls-row">
+                                <button class="btn-timer-start" id="timerStartBtn">
+                                    <i class="fa-solid fa-play"></i> START
+                                </button>
+                                <button class="btn-timer-pause" id="timerPauseBtn">
+                                    <i class="fa-solid fa-pause"></i> PAUSE
+                                </button>
+                                <button class="btn-timer-reset" id="timerResetBtn" onclick="resetPomodoro()">
+                                    <i class="fa-solid fa-rotate-right"></i>
+                                </button>
+                            </div>
+                            <div class="timer-tabs-row">
+                                <button class="timer-tab active" onclick="setTimerType('work')">Work</button>
+                                <button class="timer-tab" onclick="setTimerType('short')">Short Break</button>
+                                <button class="timer-tab" onclick="setTimerType('long')">Long Break</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 3: Recent Chats -->
+                <div class="dashboard-row-one">
+                    <div class="card recent-chats-card">
+                        <div class="card-header-flex">
+                            <div class="card-header-icon chat-icon-bg">
+                                <i class="fa-regular fa-comments"></i>
+                            </div>
+                            <h3>Recent Chats</h3>
+                            <div class="chat-header-actions">
+                                <i class="fa-solid fa-magnifying-glass" style="cursor:pointer;" onclick="switchTab('ai-tutor')"></i>
+                                <i class="fa-solid fa-trash-can" style="cursor:pointer;" onclick="clearChatLogs()" title="Clear Chat History"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="empty-state" id="dashboardChatEmptyState">
+                            <p>No memory data available.</p>
+                            <button class="btn-create-profile" onclick="focusProfile()">Create Memory Profile</button>
+                        </div>
+                        
+                        <div class="content-state" id="dashboardChatContentState" style="display: none;">
+                            <div class="chat-messages" id="dashboardChatMessages">
+                                <!-- Messages render here -->
+                            </div>
+                            <form id="dashboardChatForm" class="chat-form">
+                                <input type="file" id="dashboardChatFile" style="display: none;" onchange="handleChatFileUpload(this, 'dashboard')">
+                                <button type="button" class="btn-chat-file" onclick="document.getElementById('dashboardChatFile').click()"><i class="fa-solid fa-paperclip"></i></button>
+                                <input type="text" id="dashboardChatInput" placeholder="Ask AI anything..." autocomplete="off">
+                                <button type="button" class="btn-chat-mic" id="dashboardChatVoiceBtn" onclick="toggleVoiceInput('dashboard')"><i class="fa-solid fa-microphone"></i></button>
+                                <button type="submit" class="btn-chat-send"><i class="fa-solid fa-paper-plane"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. SUBJECTS VIEW -->
+            <div id="view-subjects" class="tab-view">
+                <div class="card-header-flex" style="margin-bottom: 24px;">
+                    <h2 class="view-title" style="margin-bottom: 0;">Subjects</h2>
+                    <button class="btn-primary" onclick="triggerAddSubject()"><i class="fa-solid fa-plus"></i> Add Subject</button>
+                </div>
+                <div class="subjects-grid" id="subjectsGrid">
+                    <!-- Populated dynamically to support CRUD -->
+                </div>
+            </div>
+
+            <!-- 2.5 DEDICATED SUBJECT DETAIL VIEW (New Requirement) -->
+            <div id="view-subject-detail" class="tab-view">
+                <button class="btn-outline" onclick="switchTab('subjects')" style="margin-bottom: 20px;"><i class="fa-solid fa-arrow-left"></i> Back to Subjects</button>
+                <div class="subject-detail-header card" style="margin-bottom: 25px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                        <div>
+                            <h2 class="view-title" id="subjectDetailName" style="margin-bottom: 5px;">Subject Name</h2>
+                            <p id="subjectDetailGoals" style="font-size: 13px; color: var(--text-secondary);">Daily Study Goal: -</p>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn-outline" onclick="triggerEditSubject(activeSubjectId)"><i class="fa-solid fa-pen-to-square"></i> Edit Goals</button>
+                            <button class="btn-outline" onclick="triggerRenameSubject(activeSubjectId)"><i class="fa-solid fa-tags"></i> Rename</button>
+                            <button class="btn-upgrade" onclick="triggerDeleteSubject(activeSubjectId)" style="background: #ef4444;"><i class="fa-solid fa-trash"></i> Delete Subject</button>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <div class="progress-labels">
+                            <span>Subject Progress</span>
+                            <span id="subjectDetailProgressText">0%</span>
+                        </div>
+                        <div class="progress-bar-outer">
+                            <div class="progress-bar-inner" id="subjectDetailProgressBar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-row-two">
+                    <!-- Tasks / Goals List specifically for this subject -->
+                    <div class="card planner-card">
+                        <div class="card-header-flex">
+                            <div class="card-header-icon planner-icon-bg">
+                                <i class="fa-regular fa-calendar-check"></i>
+                            </div>
+                            <h3>Subject Task Planner</h3>
+                        </div>
+                        <p class="section-title">TASKS FOR THIS SUBJECT</p>
+                        <ul id="subjectTaskList" class="checklist">
+                            <!-- Dynamically generated list -->
+                        </ul>
+                        <button class="btn-add-goal" onclick="triggerAddSubjectTask()">
+                            <i class="fa-solid fa-plus"></i> Add New Task
+                        </button>
+                    </div>
+
+                    <!-- Right side specific tools -->
+                    <div class="dashboard-right-stack">
+                        <!-- Subject specific Pomodoro widget -->
+                        <div class="card timer-card">
+                            <div class="card-header-flex">
+                                <div class="card-header-icon timer-icon-bg">
+                                    <i class="fa-regular fa-clock"></i>
+                                </div>
+                                <h3>Pomodoro Session</h3>
+                            </div>
+                            <div style="margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+                                <label style="font-size: 12px; font-weight: 600; color: var(--text-secondary);">Set study duration:</label>
+                                <input type="number" id="subjectTimerMins" value="25" min="1" max="180" style="width: 70px; padding: 6px; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; text-align: center;">
+                            </div>
+                            <div class="timer-display" id="subjectTimerDisplay">25:00</div>
+                            <div class="timer-controls-row">
+                                <button class="btn-timer-start" id="subjectTimerStartBtn" onclick="startSubjectTimer()">
+                                    <i class="fa-solid fa-play"></i> START SESSION
+                                </button>
+                                <button class="btn-timer-pause" id="subjectTimerPauseBtn" onclick="pauseSubjectTimer()">
+                                    <i class="fa-solid fa-pause"></i> PAUSE
+                                </button>
+                                <button class="btn-timer-reset" onclick="resetSubjectTimer()">
+                                    <i class="fa-solid fa-rotate-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Flashcards Widget -->
+                        <div class="card">
+                            <div class="card-header-flex">
+                                <div class="card-header-icon progress-icon-bg">
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </div>
+                                <h3>Flashcards</h3>
+                                <button class="btn-continue" onclick="triggerAddFlashcard()" style="width: auto; padding: 4px 10px;">+ Add</button>
+                            </div>
+                            
+                            <div id="flashcardContainer" style="perspective: 1000px; height: 130px; margin-bottom: 12px; display: none;">
+                                <div id="flashcardInner" onclick="flipFlashcard()" style="position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer;">
+                                    <div style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                        <p style="font-size: 11px; text-transform: uppercase; color: var(--teal); font-weight: 700; margin-bottom: 5px;">Question</p>
+                                        <h4 id="flashcardFrontText" style="font-size: 14px; font-weight: 600;">Front side question?</h4>
+                                    </div>
+                                    <div style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background: rgba(139, 92, 246, 0.1); border: 1.5px solid var(--primary); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; transform: rotateY(180deg);">
+                                        <p style="font-size: 11px; text-transform: uppercase; color: var(--primary); font-weight: 700; margin-bottom: 5px;">Answer</p>
+                                        <h4 id="flashcardBackText" style="font-size: 14px; font-weight: 600; color: #fff;">Back side explanation.</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="flashcardEmpty" class="empty-state">
+                                <p>No flashcards created for this subject.</p>
+                            </div>
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
+                                <button class="btn-outline" onclick="prevFlashcard()" style="padding: 6px 12px;"><i class="fa-solid fa-chevron-left"></i> Prev</button>
+                                <span id="flashcardIndexText">0 / 0</span>
+                                <button class="btn-outline" onclick="nextFlashcard()" style="padding: 6px 12px;">Next <i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
+                            
+                            <div style="display: flex; gap: 8px; margin-top: 10px;">
+                                <button class="btn-continue" onclick="markFlashcardMastered()" style="flex: 2;"><i class="fa-solid fa-check"></i> Mastered</button>
+                                <button class="btn-upgrade" onclick="deleteCurrentFlashcard()" style="flex: 1; background: #ef4444;"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Mini Quiz Widget -->
+                        <div class="card">
+                            <div class="card-header-flex">
+                                <div class="card-header-icon quiz-icon-bg">
+                                    <i class="fa-solid fa-list-check"></i>
+                                </div>
+                                <h3>Quick Subject Quiz</h3>
+                                <button class="btn-continue" onclick="switchTab('quiz')" style="width: auto; padding: 4px 10px;">Generate</button>
+                            </div>
+                            <div class="quiz-setup" id="subjectQuizEmpty">
+                                <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 10px;">Review your knowledge with simulated subject questions.</p>
+                                <button class="btn-generate-quiz" onclick="startSubjectMiniQuiz()">Start Mini Quiz</button>
+                            </div>
+                            <div id="subjectQuizContainer" style="display: none;">
+                                <h4 id="subjectQuizQuestion" style="font-size: 13px; font-weight: 600; margin-bottom: 12px;">Question text?</h4>
+                                <div class="quiz-options" id="subjectQuizOptions">
+                                    <!-- Populated dynamically -->
+                                </div>
+                                <div id="subjectQuizFeedback" style="margin-top: 10px; font-size: 12px; font-weight: 700;"></div>
+                            </div>
+                        </div>
+
+                        <!-- AI Recommendation Card -->
+                        <div class="card">
+                            <div class="card-header-flex">
+                                <div class="card-header-icon tutor-icon-bg">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                </div>
+                                <h3>AI Recommendation</h3>
+                            </div>
+                            <div class="matters-result" id="subjectAIRecommendation" style="border-left-color: var(--teal); font-size: 12px;">
+                                Generating customized recommendations based on profile memory...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. NOTES VIEW -->
+            <div id="view-notes" class="tab-view">
+                <h2 class="view-title">Smart Notes Generator</h2>
+                <div class="card notes-editor-card">
+                    <div class="empty-state" id="notesEmptyState">
+                        <p>No memory data available.</p>
+                        <button class="btn-create-profile" onclick="focusProfile()">Create Memory Profile</button>
+                    </div>
+                    <div class="content-state" id="notesContentState" style="display: none;">
+                        <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+                            <label style="font-weight: 600; font-size: 14px; color: var(--text-secondary);">Select Subject Folder:</label>
+                            <select id="notesSubjectSelector" class="select-control" style="width: auto; max-width: 250px;" onchange="renderNotesList()">
+                                <!-- Dynamically loaded subjects -->
+                            </select>
+                        </div>
+                        <div class="notes-workspace">
+                            <div class="notes-upload-zone" onclick="document.getElementById('notesFileInput').click()" style="cursor: pointer;">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <h3>Upload Lecture PDFs or Text Files</h3>
+                                <p>Supports PDF, JPG, PNG, TXT, DOCX files</p>
+                                <p style="font-size: 11px; color: var(--primary);">Max 20 files per subject</p>
+                                <input type="file" id="notesFileInput" style="display: none;" accept=".pdf,.jpg,.jpeg,.png,.txt,.docx" onchange="handleNotesFileUpload(this)">
+                            </div>
+                            <div class="notes-summary-box">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                                    <h3>Uploaded Files (<span id="notesCountText">0/20</span>)</h3>
+                                </div>
+                                <div class="notes-list" id="summarizedNotesList" style="display: flex; flex-direction: column; gap: 12px; max-height: 300px; overflow-y: auto;">
+                                    <!-- Populated dynamically -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. QUIZ VIEW -->
+            <div id="view-quiz" class="tab-view">
+                <h2 class="view-title">Quiz Generator</h2>
+                <div class="card quiz-generator-card">
+                    <div class="empty-state" id="quizEmptyState">
+                        <p>No memory data available.</p>
+                        <button class="btn-create-profile" onclick="focusProfile()">Create Memory Profile</button>
+                    </div>
+                    <div class="content-state" id="quizContentState" style="display: none;">
+                        <!-- Configuration Panel -->
+                        <div class="quiz-setup" id="quizConfigPanel" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="input-group">
+                                <label>Topic Name</label>
+                                <input type="text" id="quizTopicName" placeholder="e.g. Binary Search Trees">
+                            </div>
+                            <div class="input-group">
+                                <label>Description</label>
+                                <input type="text" id="quizTopicDesc" placeholder="Brief context of the topic">
+                            </div>
+                            <div class="input-group">
+                                <label>Difficulty</label>
+                                <select id="quizTopicDifficulty" class="select-control" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+                                    <option value="easy">Easy</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="hard">Hard</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>Domain / Subject</label>
+                                <select id="quizTopicDomain" class="select-control" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+                                    <!-- Populated dynamically -->
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>Question Count</label>
+                                <input type="number" id="quizTopicCount" min="10" max="20" value="10" style="padding: 12px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; color: #fff;">
+                            </div>
+                            <div class="input-group">
+                                <label>Image Reference (Optional)</label>
+                                <input type="file" id="quizTopicImage" accept="image/*" style="padding: 6px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; color: #fff;">
+                            </div>
+                            <button class="btn-primary" onclick="generateComprehensiveQuiz()" style="grid-column: span 2; margin-top: 10px;">
+                                <i class="fa-solid fa-graduation-cap"></i> Generate Comprehensive Quiz
+                            </button>
+                        </div>
+
+                        <!-- Quiz Play Area -->
+                        <div id="quizContainer" style="display: none; margin-top: 25px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; margin-bottom: 15px;">
+                                <h4 id="quizPlayHeader" style="font-family: var(--font-heading); color: var(--teal);">Topic Quiz</h4>
+                                <span id="quizPlayProgress" style="font-size: 12px; font-weight: 700; color: var(--text-secondary);">Question 1 of 10</span>
+                            </div>
+                            
+                            <h3 id="quizQuestion" style="margin-bottom: 20px; font-weight: 600; line-height: 1.4;">Question text here...</h3>
+                            
+                            <!-- Input areas for Text Answers -->
+                            <div id="quizTextAnswerInput" style="display: none; margin-bottom: 20px;">
+                                <input type="text" id="quizTextInputField" placeholder="Type your answer here..." style="width: 100%; padding: 14px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: #fff; outline: none; margin-bottom: 10px;">
+                                <button class="btn-continue" onclick="submitTextQuizAnswer()">Submit Answer</button>
+                            </div>
+
+                            <!-- MCQ/TF Options Area -->
+                            <div class="quiz-options" id="quizOptionsContainer">
+                                <!-- Options will be created dynamically -->
+                            </div>
+                            
+                            <div id="quizFeedback" style="margin-top: 20px; padding: 16px; border-radius: 12px; background: rgba(255,255,255,0.02); display: none;">
+                                <p id="quizFeedbackResult" style="font-weight: 700; margin-bottom: 6px;"></p>
+                                <p id="quizFeedbackExplanation" style="font-size: 12px; color: var(--text-secondary); line-height: 1.4;"></p>
+                                <button class="btn-primary" id="btnNextQuizQuestion" onclick="advanceQuizQuestion()" style="margin-top: 14px; padding: 8px 16px; font-size: 12px; width: auto;">Next Question</button>
+                            </div>
+                        </div>
+
+                        <!-- Quiz Score Results Area -->
+                        <div id="quizResultPanel" style="display: none; text-align: center; padding: 40px 20px;">
+                            <i class="fa-solid fa-circle-check" style="font-size: 56px; color: #22c55e; margin-bottom: 20px;"></i>
+                            <h2 style="font-family: var(--font-heading); margin-bottom: 10px;">Quiz Completed!</h2>
+                            <p style="color: var(--text-secondary); margin-bottom: 25px;">You scored <strong id="quizResultScore" style="color: #fff; font-size: 20px;">0 / 10</strong></p>
+                            <button class="btn-primary" onclick="exitQuizToConfig()"><i class="fa-solid fa-rotate-left"></i> Take Another Quiz</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. AI TUTOR CHAT VIEW -->
+            <div id="view-ai-tutor" class="tab-view tutor-chat-view-full">
+                <div class="tutor-header-bar">
+                    <div class="badges-row">
+                        <!-- Navigation shortcuts that redirect to custom views -->
+                        <span class="badge-item" onclick="switchTab('streak')"><i class="fa-solid fa-fire text-orange"></i> Study streak badge</span>
+                        <span class="badge-item" onclick="switchTab('achievements')"><i class="fa-solid fa-trophy text-yellow"></i> Achievement badges</span>
+                        <span class="badge-item" onclick="switchTab('xp')"><i class="fa-solid fa-bolt text-teal"></i> XP points</span>
+                        <span class="badge-item" onclick="switchTab('leaderboard')"><i class="fa-solid fa-ranking-star"></i> Leaderboard</span>
+                        <span class="badge-item" onclick="switchTab('calendar')"><i class="fa-solid fa-calendar"></i> Calendar</span>
+                    </div>
+                </div>
+                
+                <div class="card chat-card-full">
+                    <div class="empty-state" id="tutorEmptyState">
+                        <p>No memory data available.</p>
+                        <button class="btn-create-profile" onclick="focusProfile()">Create Memory Profile</button>
+                    </div>
+                    <div class="content-state" id="tutorContentState" style="display: none; height: 100%;">
+                        <div class="chat-header" style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3>AI Chat (Memory-Driven Assistant)</h3>
+                            <button class="btn-continue" onclick="clearChatLogs()" style="width: auto; padding: 4px 10px; font-size: 11px;">Clear Chat</button>
+                        </div>
+                        <div class="chat-messages" id="tutorChatMessages" style="flex-grow: 1; min-height: 280px; max-height: 380px;">
+                            <!-- Dynamically loaded chat bubbles -->
+                        </div>
+                        <form id="tutorChatForm" class="chat-form">
+                            <input type="file" id="tutorChatFile" style="display: none;" onchange="handleChatFileUpload(this, 'tutor')">
+                            <button type="button" class="btn-chat-file" onclick="document.getElementById('tutorChatFile').click()"><i class="fa-solid fa-paperclip"></i></button>
+                            <input type="text" id="tutorChatInput" placeholder="What is our message? Ask about your weak subjects..." autocomplete="off">
+                            <button type="button" class="btn-chat-mic" id="tutorChatVoiceBtn" onclick="toggleVoiceInput('tutor')"><i class="fa-solid fa-microphone"></i></button>
+                            <button type="submit" class="btn-chat-send"><i class="fa-solid fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. PROGRESS VIEW -->
+            <div id="view-progress" class="tab-view">
+                <h2 class="view-title">Progress & Insights</h2>
+                <div class="progress-layout">
+                    <!-- Memory Statistics -->
+                    <div class="card stats-card" id="statsCard">
+                        <div class="empty-state" id="progressStatsEmptyState">
+                            <p>No memory data available.</p>
+                            <button class="btn-create-profile" onclick="focusProfile()">Create Memory Profile</button>
+                        </div>
+                        <div class="content-state" id="progressStatsContentState" style="display: none;">
+                            <div class="card-title">
+                                <i class="fa-solid fa-chart-simple"></i>
+                                <h2>Memory Statistics</h2>
+                            </div>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <i class="fa-solid fa-database"></i>
+                                    <div class="stat-info">
+                                        <span class="stat-label">Memory Entries</span>
+                                        <span class="stat-value" id="statEntries">0</span>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                    <div class="stat-info">
+                                        <span class="stat-label">Study Sessions</span>
+                                        <span class="stat-value" id="statSessions">0</span>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <div class="stat-info">
+                                        <span class="stat-label">Weak Subjects</span>
+                                        <span class="stat-value" id="statWeak">0</span>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                    <div class="stat-info">
+                                        <span class="stat-label">Projects Recs</span>
+                                        <span class="stat-value" id="statProjects">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 25px; display: flex; gap: 10px;">
+                                <button class="btn-outline" onclick="switchTab('streak')" style="flex: 1;"><i class="fa-solid fa-fire text-orange"></i> Streak Details</button>
+                                <button class="btn-outline" onclick="switchTab('leaderboard')" style="flex: 1;"><i class="fa-solid fa-ranking-star"></i> Leaderboard</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Memory Insights -->
+                    <div class="card insights-card" id="insightsCard">
+                        <div class="empty-state" id="progressInsightsEmptyState">
+                            <p>No memory data available.</p>
+                            <button class="btn-create-profile" onclick="focusProfile()">Create Memory Profile</button>
+                        </div>
+                        <div class="content-state" id="progressInsightsContentState" style="display: none;">
+                            <div class="card-title">
+                                <i class="fa-solid fa-lightbulb"></i>
+                                <h2>Memory Insights</h2>
+                            </div>
+                            <ul id="memoryInsightsList" class="insights-list">
+                                <!-- Populated dynamically -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Memory Health Indicator & Real Charts Widget -->
+                    <div class="card" style="grid-column: span 1;" id="memoryHealthCard">
+                        <div class="empty-state" id="progressHealthEmptyState">
+                            <p>No memory data available.</p>
+                            <button class="btn-create-profile" onclick="focusProfile()">Create Memory Profile</button>
+                        </div>
+                        <div class="content-state" id="progressHealthContentState" style="display: none;">
+                            <div class="card-title">
+                                <i class="fa-solid fa-heart-pulse" style="color: #ef4444;"></i>
+                                <h2>Memory Health</h2>
+                            </div>
+                            <div style="text-align: center; margin: 15px 0;">
+                                <h1 style="font-size: 36px; font-weight: 800; font-family: var(--font-heading); color: var(--teal);" id="progressHealthPercent">0%</h1>
+                                <p style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">Your learning retention score matches dynamic tasks completed and calendar events.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Study Activity Charts (Weekly & Monthly Study Hours) -->
+                    <div class="card" style="grid-column: span 1;" id="activityChartsCard">
+                        <div class="empty-state" id="progressChartsEmptyState">
+                            <p>No memory data available.</p>
+                            <button class="btn-create-profile" onclick="focusProfile()">Create Memory Profile</button>
+                        </div>
+                        <div class="content-state" id="progressChartsContentState" style="display: none;">
+                            <div class="card-title">
+                                <i class="fa-regular fa-chart-bar" style="color: var(--primary);"></i>
+                                <h2>Study Activity Charts</h2>
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <p style="font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Weekly Study Hours</p>
+                                <div style="display: flex; justify-content: space-between; align-items: flex-end; height: 80px; margin-top: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 5px;" id="progressWeeklyChart">
+                                    <!-- CSS bars will go here -->
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 9px; color: var(--text-secondary); margin-top: 4px;">
+                                    <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px;">
+                                <p style="font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Monthly Study Hours: <strong id="progressMonthlyHoursText" style="color: #fff;">0h</strong></p>
+                                <div style="height: 6px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; margin-top: 8px;">
+                                    <div id="progressMonthlyBar" style="height: 100%; width: 0%; background: var(--teal); border-radius: 4px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline / Session History -->
+                    <div class="card timeline-card" id="timelineCard">
+                        <div class="empty-state" id="progressTimelineEmptyState">
+                            <p>No memory data available.</p>
+                            <button class="btn-create-profile" onclick="focusProfile()">Create Memory Profile</button>
+                        </div>
+                        <div class="content-state" id="progressTimelineContentState" style="display: none;">
+                            <div class="card-title">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                <h2>Memory Timeline</h2>
+                            </div>
+                            <div class="timeline-container">
+                                <ul id="timelineList" class="timeline-list">
+                                    <!-- Populated dynamically -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. PROFILE VIEW -->
+            <div id="view-profile" class="tab-view">
+                <h2 class="view-title">Profile Configuration</h2>
+                <div class="profile-layout">
+                    <!-- Profile Setup -->
+                    <section class="card profile-card" id="profileCard">
+                        <div class="card-title">
+                            <i class="fa-solid fa-user"></i>
+                            <h2>Student Profile</h2>
+                        </div>
+                        
+                        <div class="profile-status" id="profileStatus">
+                            <i class="fa-solid fa-id-card"></i> <span id="profileStatusText">No memory profile created yet</span>
+                        </div>
+
+                        <!-- Change Avatar Presets -->
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; font-size: 13px; color: var(--text-secondary); margin-bottom: 8px;">Choose Avatar</label>
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;" id="avatarPresets">
+                                <img class="avatar-option selected" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" onclick="selectPresetAvatar(this)" alt="Avatar 1" style="width: 48px; height: 48px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all 0.2s;">
+                                <img class="avatar-option" src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=100&q=80" onclick="selectPresetAvatar(this)" alt="Avatar 2" style="width: 48px; height: 48px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all 0.2s;">
+                                <img class="avatar-option" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" onclick="selectPresetAvatar(this)" alt="Avatar 3" style="width: 48px; height: 48px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all 0.2s;">
+                                <img class="avatar-option" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" onclick="selectPresetAvatar(this)" alt="Avatar 4" style="width: 48px; height: 48px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all 0.2s;">
+                            </div>
+                        </div>
+
+                        <form id="profileForm">
+                            <div class="input-group">
+                                <label>Full Name</label>
+                                <input type="text" id="name" placeholder="Enter your full name" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Department</label>
+                                <input type="text" id="department" placeholder="Information Technology">
+                            </div>
+
+                            <div class="input-group">
+                                <label>Weak Subject</label>
+                                <input type="text" id="weakSubject" placeholder="Java">
+                            </div>
+
+                            <div class="input-group">
+                                <label>Career Goal</label>
+                                <input type="text" id="careerGoal" placeholder="Full Stack AI Developer">
+                            </div>
+
+                            <div class="input-group">
+                                <label>Favorite Subject</label>
+                                <input type="text" id="favSubject" placeholder="Computer Science">
+                            </div>
+
+                            <div class="input-group">
+                                <label>Study Preference</label>
+                                <input type="text" id="studyPreference" placeholder="e.g. Visual Learning, 25m focus blocks">
+                            </div>
+
+                            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                                <button type="submit" style="flex: 2; margin-top: 0;">
+                                    <i class="fa-solid fa-floppy-disk"></i> Save Profile
+                                </button>
+                                <button type="button" onclick="exportProfileData()" style="flex: 1; padding: 14px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-weight: 700; cursor: pointer;">
+                                    <i class="fa-solid fa-download"></i> Export
+                                </button>
+                                <button type="button" onclick="deleteProfileConfirm()" style="flex: 1; padding: 14px; border-radius: 12px; background: #ef4444; border: none; color: #fff; font-weight: 700; cursor: pointer;">
+                                    <i class="fa-solid fa-trash-can"></i> Delete
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <!-- Why Memory Matters -->
+                    <section class="card matters-card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-circle-nodes"></i>
+                            <h2>Why Memory Matters</h2>
+                        </div>
+                        <div class="matters-content">
+                            <p class="matters-intro">StudyBuddy AI remembers:</p>
+                            <ul class="matters-list">
+                                <li><i class="fa-solid fa-check"></i> Weak subjects</li>
+                                <li><i class="fa-solid fa-check"></i> Study preferences</li>
+                                <li><i class="fa-solid fa-check"></i> Career goals</li>
+                                <li><i class="fa-solid fa-check"></i> Previous sessions</li>
+                                <li><i class="fa-solid fa-check"></i> Learning patterns</li>
+                            </ul>
+                            <div class="matters-result">
+                                <strong>Result:</strong> Personalized learning every time.
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- 8. SETTINGS VIEW (New Requirement) -->
+            <div id="view-settings" class="tab-view">
+                <h2 class="view-title">Application Settings</h2>
+                <div class="profile-layout">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-sliders"></i>
+                            <h2>Settings Controls</h2>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label>Language</label>
+                            <select id="settingsLanguage" class="select-control" onchange="alert('Language changed to: ' + this.value)" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+                                <option value="en" selected>English (US)</option>
+                                <option value="es">Español</option>
+                                <option value="fr">Français</option>
+                                <option value="de">Deutsch</option>
+                                <option value="hi">हिन्दी</option>
+                            </select>
+                        </div>
+
+                        <div class="tutor-voice-row" style="margin-bottom: 18px;">
+                            <div class="voice-support-pill">
+                                <i class="fa-solid fa-bell"></i>
+                                <span>Push Notifications</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="settingsNotifications" checked onchange="alert('Notifications setting updated!')">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="tutor-voice-row" style="margin-bottom: 25px;">
+                            <div class="voice-support-pill">
+                                <i class="fa-solid fa-volume-high"></i>
+                                <span>Sound Effects & Audio Output</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="settingsSound" checked onchange="alert('Sound preferences updated!')">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
+                            <h3 style="font-family: var(--font-heading); font-size: 14px; margin-bottom: 12px; color: var(--orange);">System & Data Tools</h3>
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                <button class="btn-upgrade" onclick="exportApplicationData()" style="flex: 1;"><i class="fa-solid fa-file-export"></i> Export All Data</button>
+                                <button class="btn-continue" onclick="document.getElementById('settingsImportFile').click()" style="flex: 1;"><i class="fa-solid fa-file-import"></i> Import Data</button>
+                                <input type="file" id="settingsImportFile" accept=".json" style="display: none;" onchange="importApplicationData(this)">
+                                <button class="btn-upgrade" onclick="resetApplicationData()" style="flex: 1; background: #ef4444;"><i class="fa-solid fa-power-off"></i> Hard Reset Data</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <h2>About StudyBuddy AI</h2>
+                        </div>
+                        <div style="font-size: 13px; line-height: 1.6; color: var(--text-secondary);">
+                            <p style="margin-bottom: 10px;"><strong>Version:</strong> 2.1.0-Hackathon-Stable</p>
+                            <p style="margin-bottom: 15px;"><strong>Privacy Policy:</strong> Your data remains strictly local in your browser's <code>localStorage</code> database. No files, profile inputs, or conversation histories are ever sent to remote trackers or external cloud storage without user authorization.</p>
+                            <div class="matters-result" style="border-left-color: var(--primary);">
+                                Designed for absolute data safety, offline flexibility, and real-time custom tutoring.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. POMODORO DEDICATED VIEW (New Requirement) -->
+            <div id="view-pomodoro" class="tab-view">
+                <h2 class="view-title">Dedicated Pomodoro Space</h2>
+                <div class="profile-layout">
+                    <div class="card" style="text-align: center; padding: 40px 20px;">
+                        <h3 id="pomoViewSubjectTitle" style="font-family: var(--font-heading); font-size: 24px; margin-bottom: 10px; color: var(--teal);">General Study</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 25px;">Stay focused. Avoid tab distraction and build your progress score.</p>
+                        
+                        <div class="timer-display" id="pomoViewDisplay" style="font-size: 80px; margin-bottom: 20px; font-weight: 800;">25:00</div>
+                        
+                        <div style="max-width: 400px; margin: 0 auto 30px auto; display: flex; gap: 12px;">
+                            <button class="btn-primary" id="pomoViewStartBtn" onclick="startPomoViewTimer()" style="flex: 2; font-size: 16px; padding: 14px;"><i class="fa-solid fa-play"></i> Start Session</button>
+                            <button class="btn-outline" id="pomoViewPauseBtn" onclick="pausePomoViewTimer()" style="flex: 1; font-size: 16px; padding: 14px;"><i class="fa-solid fa-pause"></i> Pause</button>
+                            <button class="btn-upgrade" onclick="resetPomoViewTimer()" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color:#fff; flex: 0.5; font-size: 16px; padding: 14px;"><i class="fa-solid fa-rotate-right"></i></button>
+                        </div>
+
+                        <div class="timer-tabs-row" style="max-width: 400px; margin: 0 auto;">
+                            <button class="timer-tab active" id="pomoViewTabWork" onclick="setPomoViewType('work')">Work (25m)</button>
+                            <button class="timer-tab" id="pomoViewTabShort" onclick="setPomoViewType('short')">Short Break (5m)</button>
+                            <button class="timer-tab" id="pomoViewTabLong" onclick="setPomoViewType('long')">Long Break (15m)</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-gear"></i>
+                            <h2>Timer Configuration</h2>
+                        </div>
+                        <div class="input-group">
+                            <label>Associate Subject Session</label>
+                            <select id="pomoViewSubjectSelector" class="select-control" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);" onchange="updatePomoViewSubjectLabel()">
+                                <!-- Dynamically populated -->
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Custom Session Minutes</label>
+                            <input type="number" id="pomoViewCustomMins" min="1" max="120" value="25" class="select-control" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);" onchange="updatePomoViewCustomMinutes()">
+                        </div>
+                        <div class="matters-result" style="font-size: 12px; margin-top: 20px;">
+                            <strong>Rule:</strong> Completed Pomodoro sessions are automatically registered onto your Memory Timeline and grant you +30 XP!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. STREAK VIEW (New Requirement) -->
+            <div id="view-streak" class="tab-view">
+                <h2 class="view-title">Study Streak & Milestones</h2>
+                <div class="profile-layout">
+                    <!-- Numbers & Chart Card -->
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-fire text-orange"></i>
+                            <h2>Retention Streaks</h2>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px;">
+                            <div class="tracker-stat-box" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 16px; border-radius: 12px;">
+                                <span class="stat-title">CURRENT STREAK</span>
+                                <span class="stat-val" id="streakViewCurrent" style="font-size: 32px; color: var(--orange);">0 Days</span>
+                            </div>
+                            <div class="tracker-stat-box" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 16px; border-radius: 12px;">
+                                <span class="stat-title">LONGEST STREAK</span>
+                                <span class="stat-val" id="streakViewLongest" style="font-size: 32px; color: var(--teal);">0 Days</span>
+                            </div>
+                        </div>
+
+                        <!-- 7 Day Activity Chart -->
+                        <h3 style="font-size: 12px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 12px;">7-Day Study Duration Chart (mins)</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-end; height: 120px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;" id="streakActivityChart">
+                            <!-- Populated with CSS bars -->
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 9px; color: var(--text-secondary); margin-top: 6px; margin-bottom: 20px;">
+                            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                        </div>
+                    </div>
+
+                    <!-- Monthly Activity Calendar (Active dots) -->
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fa-regular fa-calendar-check"></i>
+                            <h2>Activity Log Calendar</h2>
+                        </div>
+                        <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 12px;">Days with logged study sessions are marked with active orange dots.</p>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; font-size: 11px;" id="streakMonthlyCalendar">
+                            <!-- Populated dynamically -->
+                        </div>
+                        
+                        <div style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 18px;">
+                            <p style="font-size: 12px; color: var(--text-secondary);">Total Sessions: <strong id="streakViewSessionsText" style="color:#fff;">0</strong> | Total Study Hours: <strong id="streakViewHoursText" style="color:#fff;">0h</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. ACHIEVEMENTS VIEW (New Requirement) -->
+            <div id="view-achievements" class="tab-view">
+                <h2 class="view-title">Unlocked Achievement Badges</h2>
+                <div class="subjects-grid" id="achievementsGrid">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- 12. XP POINTS VIEW (New Requirement) -->
+            <div id="view-xp" class="tab-view">
+                <h2 class="view-title">XP Level & Learning Score</h2>
+                <div class="profile-layout">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-bolt text-teal"></i>
+                            <h2>XP Status</h2>
+                        </div>
+                        <div style="text-align: center; margin-bottom: 25px;">
+                            <h1 style="font-size: 48px; font-weight: 800; font-family: var(--font-heading); color: var(--primary);" id="xpViewPoints">0 XP</h1>
+                            <p style="font-size: 16px; font-weight: 700; color: #fff; margin-top: 5px;">Level <span id="xpViewLevel">1</span></p>
+                        </div>
+
+                        <label style="font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Progress to next level</label>
+                        <div style="height: 10px; background: rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden; margin-top: 8px; margin-bottom: 12px;">
+                            <div id="xpViewProgressBar" style="height: 100%; width: 0%; background: linear-gradient(90deg, var(--teal), var(--primary)); border-radius: 6px;"></div>
+                        </div>
+                        <p style="font-size: 11px; color: var(--text-secondary);" id="xpNextLevelText">0 / 100 XP</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-list-check"></i>
+                            <h2>Recent XP History</h2>
+                        </div>
+                        <div style="max-height: 250px; overflow-y: auto;" id="xpHistoryList">
+                            <!-- List of history logs -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 13. STUDY CALENDAR VIEW (New Requirement) -->
+            <div id="view-calendar" class="tab-view">
+                <h2 class="view-title">Interactive Study Planner Calendar</h2>
+                <div class="profile-layout">
+                    <!-- Calendar Month Grid Card -->
+                    <div class="card">
+                        <div class="card-title" style="justify-content: space-between; align-items: center; width:100%;">
+                            <h2 id="calendarMonthYear" style="font-family: var(--font-heading); font-size: 16px;">June 2026</h2>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn-outline" onclick="prevCalendarMonth()" style="padding: 6px 12px;"><i class="fa-solid fa-chevron-left"></i></button>
+                                <button class="btn-outline" onclick="nextCalendarMonth()" style="padding: 6px 12px;"><i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 11px; font-weight: 700; color: var(--text-secondary); margin-bottom: 10px; margin-top: 15px;">
+                            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; min-height: 240px;" id="calendarDaysGrid">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Date planner notes/goals -->
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fa-regular fa-calendar-check" style="color: var(--teal);"></i>
+                            <h2>Plans for <span id="calendarSelectedDateText">Select Date</span></h2>
+                        </div>
+                        
+                        <div id="calendarPlanList" style="display: flex; flex-direction: column; gap: 10px; max-height: 250px; overflow-y: auto; margin-bottom: 20px;">
+                            <!-- Populated with study items -->
+                        </div>
+
+                        <div id="calendarPlanAddForm" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; display: none;">
+                            <h3 style="font-size: 13px; font-weight: 700; margin-bottom: 12px;">Add Study Plan Item</h3>
+                            <div class="input-group">
+                                <label>Subject/Topic</label>
+                                <input type="text" id="calendarPlanSubject" placeholder="e.g. Mathematics">
+                            </div>
+                            <div class="input-group">
+                                <label>Duration Minutes</label>
+                                <input type="number" id="calendarPlanMinutes" value="25" min="1">
+                            </div>
+                            <button class="btn-primary" onclick="saveCalendarPlanItem()">Save Study Plan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 14. LEADERBOARD VIEW (New Requirement) -->
+            <div id="view-leaderboard" class="tab-view">
+                <h2 class="view-title">Dynamic Retention Leaderboard</h2>
+                <div class="card" style="padding: 24px;">
+                    <div class="card-title">
+                        <i class="fa-solid fa-ranking-star" style="color: var(--primary);"></i>
+                        <h2>Rankings List</h2>
+                    </div>
+                    
+                    <div style="overflow-x: auto; margin-top: 20px;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 13px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); color: var(--text-secondary);">
+                                    <th style="padding: 12px;">Rank</th>
+                                    <th style="padding: 12px;">Name</th>
+                                    <th style="padding: 12px;">XP Points</th>
+                                    <th style="padding: 12px;">Streak</th>
+                                    <th style="padding: 12px;">Study Hours</th>
+                                    <th style="padding: 12px;">Top Badge</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leaderboardTableBody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <p>StudyBuddy AI &copy; 2026 | Learn Smarter, Not Harder</p>
+    </footer>
+
+    <!-- Floating Yellow Heart Theme Button -->
+    <button id="floatingYellowThemeBtn" class="floating-yellow-btn" title="Yellow Theme">
+        <i class="fa-solid fa-heart"></i>
+    </button>
+    <!-- Floating Yellow Heart Theme Button -->
+    <button id="floatingYellowThemeBtn" class="floating-yellow-btn" title="Yellow Theme">
+        <i class="fa-solid fa-heart"></i>
+    </button>
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
