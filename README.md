@@ -117,6 +117,9 @@ SQLite Database
 
 Personalized Recommendations
 ```
+Images 
+
+<img width="1536" height="1024" alt="architecture" src="https://github.com/user-attachments/assets/2e847cb2-948d-4b5e-bf1c-61d691419740" />
 
 ---
 
