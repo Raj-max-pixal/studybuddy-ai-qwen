@@ -209,7 +209,23 @@ README.md
 * Smart Revision Scheduler
 
 ---
+ScreenShots
+1.<img width="1902" height="898" alt="1" src="https://github.com/user-attachments/assets/5c7cdcdf-e9a6-4454-8ff8-bf6aa4c98fd5" />
 
+2.<img width="1893" height="905" alt="2" src="https://github.com/user-attachments/assets/ce2409a2-0457-413b-9acd-da5347fb8fac" />
+
+3.<img width="1903" height="914" alt="3" src="https://github.com/user-attachments/assets/d0f34dba-013a-4060-ba2d-dd2ea985d81e" />
+
+4.<img width="1906" height="914" alt="4" src="https://github.com/user-attachments/assets/4a5306eb-0725-4de2-b307-548f630339a8" />
+
+5.<img width="1912" height="908" alt="5" src="https://github.com/user-attachments/assets/4e522f14-4a4c-4cec-981a-07991da1af16" />
+
+6.<img width="1908" height="905" alt="6" src="https://github.com/user-attachments/assets/e2167b0d-8c7e-47d4-b61b-c7a3ccc78a23" />
+
+
+
+
+---
 ## 🏆 Hackathon Information
 
 **Hackathon:** Global AI Hackathon Series with Qwen Cloud
