@@ -234,13 +234,19 @@ ScreenShots
 - **Team:** AstroVertex AI
 - **Developer:** Raj (Solo Developer)
 
-## 📝 Medium Blog
+---
 
-Read the complete development journey here:
+## 📝 Project Resources
 
-🔗 **Building StudyBuddy AI: A Persistent Memory Agent for Personalized Learning with Qwen3**
+## 🔗 Quick Links
 
-https://medium.com/@rajasaranyaraj20/building-studybuddy-ai-a-persistent-memory-agent-for-personalized-learning-with-qwen3-29e16c45847f?sharedUserId=rajasaranyaraj20
+| Resource | Link |
+|----------|------|
+| 🌐 Live Demo | https://studybuddy-ai-qwen.vercel.app/ |
+| 🎥 Demo Video | https://youtu.be/Gw3P2bFuBoE?si=nWywcAhI0RxV27XV |
+| 📖 Medium Blog | https://medium.com/@rajasaranyaraj20/building-studybuddy-ai-a-persistent-memory-agent-for-personalized-learning-with-qwen3-29e16c45847f?sharedUserId=rajasaranyaraj20 |
+| 🏅 Devpost | https://devpost.com/software/studybuddy-ai-memoryagent |
+| 💻 GitHub | https://github.com/Raj-max-pixal/studybuddy-ai-qwen |
 
 ---
 
