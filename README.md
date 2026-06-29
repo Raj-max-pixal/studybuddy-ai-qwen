@@ -228,11 +228,19 @@ ScreenShots
 ---
 ## 🏆 Hackathon Information
 
-**Hackathon:** Global AI Hackathon Series with Qwen Cloud
+- **Hackathon:** Global AI Hackathon Series with Qwen Cloud
+- **Track:** MemoryAgent (Track 1)
+- **Theme:** Persistent AI Memory Systems
+- **Team:** AstroVertex AI
+- **Developer:** Raj (Solo Developer)
 
-**Track:** MemoryAgent
+## 📝 Medium Blog
 
-**Theme:** Persistent AI Memory Systems
+Read the complete development journey here:
+
+🔗 **Building StudyBuddy AI: A Persistent Memory Agent for Personalized Learning with Qwen3**
+
+https://medium.com/@rajasaranyaraj20/building-studybuddy-ai-a-persistent-memory-agent-for-personalized-learning-with-qwen3-29e16c45847f?sharedUserId=rajasaranyaraj20
 
 ---
 
